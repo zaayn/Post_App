@@ -42,8 +42,11 @@
                 </a>
             </center>     
             <div class="col-md-12" style="padding-top: 10px">
-                <i class="far fa-heart" style="font-size: 30px; padding-right:20px" ></i>
+                <i class="far fa-heart" style="font-size: 30px" ></i>
+                <i style="font-size: 30px; padding-right:20px">{{$post->jml_like}}</i>
+
                 <i class="far fa-comment-alt" style="font-size: 30px"></i>
+                <i style="font-size: 30px">{{$post->jml_cmt}}</i>
 
             </div>
         </div>

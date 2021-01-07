@@ -36,7 +36,7 @@
         <nav class="navbar navbar-default header navbar-fixed-top">
           <div class="col-md-12 nav-wrapper">
             <div class="navbar-header" style="width:100%;">
-                <a href="{{asset('index.html')}}" class="navbar-brand"> 
+                <a href="{{asset('user/home')}}" class="navbar-brand"> 
                  <b>Insta App</b>
                 </a>
               <ul class="nav navbar-nav navbar-right user-nav">

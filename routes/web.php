@@ -23,6 +23,7 @@ Route::group(['prefix' => 'user',  'middleware' => 'is_user'], function(){
     Route::post('/store/post', 'PostController@store')->name('store.post');
     Route::get('/post/{id}', 'PostController@post')->name('post');
     Route::post('/store/comemnt', 'PostController@comment')->name('store.comment');
+    Route::get('/update/like{pid}','PostController@like')->name('update.like');
 });
 Route::group(['prefix' => 'admin',  'middleware' => 'is_admin'], function(){
     Route::get('/home', 'AdminController@index')->name('home'); //Dashboard super admin

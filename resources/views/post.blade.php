@@ -13,14 +13,17 @@
                 <img src="{{asset('/thum/'.$post->image)}}"/><br>
             </center>     
             <div class="col-md-12" style="padding-top: 10px">
-                <i class="far fa-heart" style="font-size: 30px; padding-right:20px" ></i>
+                <a href="{{route('update.like',$post->pid)}}"><i class="far fa-heart" style="font-size: 30px" ></i></a>
+                <i style="font-size: 30px; padding-right:20px">{{$post->jml_like}}</i>
+
                 <i class="far fa-comment-alt" style="font-size: 30px"></i>
+                <i style="font-size: 30px">{{$post->jml_cmt}}</i>
             </div>
             <div class="col-md-12" style="padding-top: 10px">
                 @foreach($comments as $comment)
                 <ol class="panel-heading">
                     <img src="{{asset('/img/'.$comment->user->dp)}}" class="img-circle" alt="User Image" height="30px" width="30px">
-                    {{ $comment->user->name }} <br>
+                    {{ $comment->user->name }} <br><br>
                     {{ $comment->comments }} 
                 </ol>
                 @endforeach

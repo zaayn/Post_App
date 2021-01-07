@@ -7,6 +7,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Comment;
+use App\Like;
 
 class PostController extends Controller
 {
@@ -58,11 +59,42 @@ class PostController extends Controller
         $comment->pid   = $request->pid != '' ? $request->pid:NULL;
         $comment->comments = $request->comments;
 
-        if ($comment->save()){
+        $post = Post::findOrFail($comment->pid);
+        $post->jml_cmt += 1;
+
+        if ($comment->save() && $post->save()){
             return redirect()->back();
         }
         else{
             return redirect('/user/post');
         }
+    }
+    public function like(Request $request, $pid)
+    {
+        
+        $check = Like::where('id',Auth::user()->id)->where('pid',$pid)->count();
+        if($check != 0)
+        {
+            $post = Post::findorFail($pid);
+            $post->jml_like -= 1;
+            $like = Like::where('id',Auth::user()->id)->where('pid',$pid)->delete();
+
+            if ($post->save()) {
+                return redirect()->back();
+            }
+        }
+        else
+        {
+            $like       = new Like;
+            $like->lid  = $request->lid;
+            $like->pid  = $request->pid != '' ? $request->pid:NULL;
+            $like->id   = Auth::user()->id;
+
+            $post = Post::findorFail($pid);
+            $post->jml_like += 1;
+        }
+        
+        if ($post->save() && $like->save())
+            return redirect()->back();
     }
 }

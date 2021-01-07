@@ -20,6 +20,7 @@ class CretaeLikeTable extends Migration
                 ->references('pid')
                 ->on('post')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('id');
             $table->timestamps();
         });
     }
