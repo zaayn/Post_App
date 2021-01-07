@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role','dp',
     ];
 
     /**
@@ -26,4 +26,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    const ADMIN_TYPE = 'admin';
+    const USER_TYPE = 'user';
+
+    public function isAdmin()    {        
+        return $this->role === self::ADMIN_TYPE;    
+    }
+    public function isUser()    {        
+        return $this->role === self::USER_TYPE;    
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

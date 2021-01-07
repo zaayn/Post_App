@@ -23,7 +23,6 @@
                 </div>
             @endif
             <form method="POST" action="{{ route('login') }}">
-            {{-- <form action="{{ url('/loginPost') }}" method="post"> --}}
                 {{ csrf_field() }}
 
                 <div class="form-group">

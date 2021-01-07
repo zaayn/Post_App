@@ -11,14 +11,19 @@
 |
 */
 
-Route::get('/2', function () {
-    return view('auth.login2');
-});
-Route::get('/huhu', function () {
-    return view('home');
-});
+
 
 Auth::routes();
+Route::get('/', function () {
+    return view('auth.login');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::group(['prefix' => 'user',  'middleware' => 'is_user'], function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/store/post', 'PostController@store')->name('store.post');
+    Route::get('/post/{id}', 'PostController@post')->name('post');
+    Route::post('/store/comemnt', 'PostController@comment')->name('store.comment');
+});
+Route::group(['prefix' => 'admin',  'middleware' => 'is_admin'], function(){
+    Route::get('/home', 'AdminController@index')->name('home'); //Dashboard super admin
+});
