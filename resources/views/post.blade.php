@@ -42,16 +42,20 @@
 <div class="col-md-4">
     <div class="panel">
         <div class="panel-body">  
+            <h3>Profil</h3>
+            <img src="{{asset('/img/'.$me->dp)}}" class="img-circle" height="35px" width="35px">
+            <span style="padding-left: 10px; font-size: 20px">{{ $me->name }}</span>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
             <h3>User Online</h3>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
-            hallo<br>
+            @foreach ($users as $usr)
+            <ol class="panel-heading">
+                <img src="{{asset('/img/'.$usr->dp)}}" class="img-circle" height="35px" width="35px">
+                <span style="padding-left: 10px; font-size: 20px">{{ $usr->name }}</span>
+            </ol>
+            @endforeach
         </div>
     </div>
 </div>

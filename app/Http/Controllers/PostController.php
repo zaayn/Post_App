@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Comment;
 use App\Like;
+use App\User;
 
 class PostController extends Controller
 {
@@ -48,7 +49,11 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($pid);
         $data['comments'] = Comment::where('pid',$pid)->get();
-        return view('/post',$data)->with('post',$post);
+
+        $me = User::findOrFail(Auth::user()->id);
+        $data['users'] = User::where('role','user')->where('id','!=',Auth::user()->id)->get();
+
+        return view('/post',$data)->with('post',$post)->with('me',$me);
     }
     public function comment(Request $request)
     {
